@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Art Music Entertainment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0b; --panel:#141416; --line:#26262a;
+  --text:#f3f1ec; --muted:#a9a6a0;
+  --gold:#c8952f; --gold-2:#e2b04d; --gold-ink:#1a1204;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:Anton,Impact,sans-serif;font-weight:400;letter-spacing:.02em;line-height:1.02;margin:0}
+
+/* header */
+header{position:sticky;top:0;z-index:20;background:rgba(10,10,11,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;height:68px}
+.nav img{height:30px;width:auto}
+.nav nav{display:flex;align-items:center;gap:24px;font-size:14px;font-weight:500}
+.nav nav a{text-decoration:none;color:var(--muted)}
+.nav nav a:hover{color:var(--text)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 22px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none;letter-spacing:.02em;transition:transform .15s ease, background .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn-gold{background:var(--gold);color:var(--gold-ink)}
+.btn-gold:hover{background:var(--gold-2)}
+.btn-line{border:1px solid #3a3a40;color:var(--text)}
+.btn-line:hover{border-color:var(--gold);color:var(--gold-2)}
+.btn svg{width:20px;height:20px;flex:none}
+.nav .btn{min-height:42px;padding:0 18px;font-size:13px}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding:110px 0 100px;border-bottom:1px solid var(--line)}
+.hero::before{content:"";position:absolute;inset:-20% -10% auto;height:120%;background:radial-gradient(ellipse 60% 50% at 50% 30%, rgba(200,149,47,.20), transparent 70%);pointer-events:none}
+.hero .wrap{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:34px}
+.hero-logo{width:min(720px,92%)}
+.hero p.lead{max-width:640px;margin:0;font-size:19px;color:#d9d6cf}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-2)}
+
+/* about */
+.about{padding:90px 0;border-bottom:1px solid var(--line)}
+.about .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:48px;align-items:start}
+.about h2{font-size:clamp(40px,6vw,64px)}
+.about p{margin:0 0 16px;color:#d2cfc8;font-size:17px}
+.pillars{display:grid;gap:14px;margin-top:8px}
+.pillar{display:flex;gap:16px;align-items:flex-start;padding:18px 20px;background:var(--panel);border:1px solid var(--line);border-radius:14px}
+.pillar b{display:block;font-size:16px}
+.pillar span{color:var(--muted);font-size:14px}
+.pillar svg{width:24px;height:24px;color:var(--gold-2);flex:none;margin-top:2px}
+
+/* artists */
+.artists{padding:90px 0 40px}
+.artists > .wrap > h2{font-size:clamp(44px,7vw,80px);margin-bottom:14px}
+.artists > .wrap > p{color:var(--muted);margin:0 0 56px;max-width:560px}
+.artist{padding:48px 0;border-top:1px solid var(--line)}
+.artist-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;margin-bottom:28px}
+.artist-head .role{font-size:13px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold-2)}
+.artist-head h3{font-size:clamp(48px,7vw,84px)}
+.artist-body{display:flex;flex-direction:column;align-items:center;gap:28px}
+.visual{flex:0 0 auto;width:min(100%,420px);aspect-ratio:4/5;border-radius:20px;overflow:hidden;position:relative;background:#111;border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+.visual::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(ellipse 70% 55% at 50% 40%, rgba(200,149,47,.22), transparent 70%),
+  repeating-linear-gradient(115deg, rgba(255,255,255,.025) 0 2px, transparent 2px 9px)}
+.visual img.logo{position:relative;width:72%;filter:drop-shadow(0 10px 30px rgba(0,0,0,.6))}
+.visual.has-video{cursor:pointer}
+.visual.has-video::before{pointer-events:none;z-index:1;background:linear-gradient(to top, rgba(0,0,0,.75), rgba(0,0,0,0) 45%)}
+.visual video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.visual.has-video img.logo{pointer-events:none;position:absolute;z-index:2;width:42%;left:22px;bottom:20px}
+.visual.has-video video{cursor:pointer}
+.play{position:absolute;z-index:3;left:50%;top:50%;transform:translate(-50%,-50%);width:84px;height:84px;border-radius:50%;border:none;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .15s ease,background .15s ease}
+.play:hover{background:var(--gold);color:var(--gold-ink);transform:translate(-50%,-50%) scale(1.06)}
+.play svg{width:38px;height:38px;margin-left:5px}
+.visual.playing .play{display:none}
+.sound[hidden]{display:none}
+.sound{position:absolute;z-index:3;right:18px;bottom:18px;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:none;border-radius:999px;background:rgba(0,0,0,.65);backdrop-filter:blur(6px);color:#fff;font:700 13px Inter,sans-serif;cursor:pointer}
+.sound:hover{background:rgba(0,0,0,.85)}
+.sound svg{width:20px;height:20px}
+.sound .i-on{display:none}
+.sound.on .i-on{display:block}
+.sound.on .i-off{display:none}
+.sound.on span{display:none}
+.sound.on{padding:0 13px}
+.visual .tag{position:absolute;left:18px;bottom:16px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#77746e}
+.info{width:100%;max-width:620px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px}
+.info .role{font-size:13px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold-2)}
+.info h3{font-size:clamp(48px,7vw,84px)}
+.info p{margin:0;color:#d2cfc8;font-size:17px;max-width:520px}
+.badge{align-self:center;display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border-radius:999px;border:1px solid rgba(200,149,47,.5);background:rgba(200,149,47,.08);font-size:13px;font-weight:700;color:var(--gold-2)}
+.links{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.links .btn{min-height:44px;font-size:14px;border:none}
+.links a[href*="spotify"]{background:#1DB954;color:#000}
+.links a[href*="youtube"]{background:#D90000;color:#fff}
+.links a[href*="soundcloud"]{background:#FF5500;color:#170800}
+.links .btn:hover{filter:brightness(1.12);color:inherit}
+.links a[href*="spotify"]:hover{color:#000}
+.links a[href*="youtube"]:hover{color:#fff}
+.links a[href*="soundcloud"]:hover{color:#170800}
+
+
+/* streaming section */
+.stream{background:#000;border-bottom:1px solid var(--line);padding-bottom:40px}
+.stream-hero{position:relative;min-height:min(78vh,640px);display:flex;align-items:flex-end;overflow:hidden}
+.stream-hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%;filter:saturate(1.1);transition:opacity .5s ease}
+.stream-hero-bg.fade,.stream-hero-logo.fade,.stream-hero-meta.fade{opacity:0}
+.stream-hero-logo,.stream-hero-meta{transition:opacity .5s ease}
+.stream-hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.92) 0%,rgba(0,0,0,.65) 35%,rgba(0,0,0,0) 70%),linear-gradient(0deg,#000 0%,rgba(0,0,0,0) 40%)}
+.stream-hero-content{position:relative;width:100%;padding-top:80px;padding-bottom:56px;display:flex;flex-direction:column;align-items:flex-start;gap:18px}
+.stream-kicker{font-size:12px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-2)}
+.stream-hero-logo{width:min(300px,62%);filter:drop-shadow(0 8px 24px rgba(0,0,0,.7))}
+.stream-hero-meta{margin:0;color:#e6e3dc;font-size:16px}
+.stream-hero-meta b{color:#fff}
+.stream-hero-btns{display:flex;flex-wrap:wrap;gap:12px}
+.sbtn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 26px;border-radius:6px;border:none;font:700 17px Inter,sans-serif;text-decoration:none;cursor:pointer;transition:background .15s ease}
+.sbtn svg{width:24px;height:24px}
+.sbtn-play{background:#fff;color:#000}
+.sbtn-play:hover{background:rgba(255,255,255,.78)}
+.sbtn-info{background:rgba(109,109,110,.7);color:#fff}
+.sbtn-info:hover{background:rgba(109,109,110,.45)}
+.stream-rows{position:relative;margin-top:-30px;display:flex;flex-direction:column;gap:34px}
+.srow h3{font-family:Inter,sans-serif;font-weight:700;font-size:20px;letter-spacing:0;margin:0 0 12px;padding:0 24px;max-width:1180px;margin-left:auto;margin-right:auto}
+.srow-viewport{position:relative}
+.srow-track{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 max(24px,calc((100% - 1132px)/2));padding:14px max(24px,calc((100% - 1132px)/2)) 18px;scrollbar-width:none}
+.srow-track::-webkit-scrollbar{display:none}
+.card{flex:0 0 auto;width:clamp(140px,16vw,200px);aspect-ratio:2/3;border-radius:6px;overflow:hidden;position:relative;scroll-snap-align:start;border:none;padding:0;background:#181818;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;color:#fff;text-align:left}
+.card img.poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.9) 0%,rgba(0,0,0,0) 55%)}
+.card .clogo{position:absolute;z-index:1;left:10px;right:10px;bottom:34px;width:70%;filter:drop-shadow(0 4px 10px rgba(0,0,0,.8))}
+.card .ctitle{position:absolute;z-index:1;left:10px;right:10px;bottom:10px;font:700 12px/1.25 Inter,sans-serif;color:#eee;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .cplay{position:absolute;z-index:1;top:50%;left:50%;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;border:2px solid #fff;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s ease}
+.card .cplay svg{width:22px;height:22px;margin-left:3px}
+.card:hover,.card:focus-visible{transform:scale(1.07);z-index:2;box-shadow:0 14px 34px rgba(0,0,0,.8)}
+.card:hover .cplay,.card:focus-visible .cplay{opacity:1}
+.card:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.srow-arrow{position:absolute;top:14px;bottom:18px;width:46px;z-index:3;border:none;background:rgba(0,0,0,.55);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s ease}
+.srow-arrow svg{width:28px;height:28px}
+.srow-arrow.l{left:0}.srow-arrow.r{right:0}
+.srow-viewport:hover .srow-arrow{opacity:1}
+.srow-arrow[hidden]{display:none}
+
+/* player overlay */
+.player{position:fixed;inset:0;z-index:100;background:#000;display:flex;flex-direction:column}
+.player[hidden]{display:none}
+.player-top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 18px}
+.player-title{display:flex;flex-direction:column;line-height:1.3}
+.player-title b{font-size:18px}
+.player-title span{color:#aaa;font-size:14px}
+.player-stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;gap:14px;padding:0 12px}
+.player video{max-height:100%;max-width:min(100%,560px);height:100%;width:auto;background:#000;border-radius:8px}
+.pbtn{width:48px;height:48px;flex:none;border:none;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.pbtn:hover{background:rgba(255,255,255,.25)}
+.pbtn svg{width:24px;height:24px}
+.parrow[disabled]{opacity:.25;cursor:default}
+.player-count{text-align:center;color:#aaa;font-size:13px;padding:12px 0 18px}
+
+/* artist logo (static) + watch button */
+.artist-logo{width:min(100%,320px);padding:10px 0}
+.artist-logo img{width:100%}
+.btn-watch{background:#fff;color:#000;border:none;font-family:Inter,sans-serif;cursor:pointer}
+.btn-watch:hover{background:#ddd}
+@media (max-width:760px){
+  .stream-hero{min-height:560px}
+  .stream-hero-bg{object-position:62% center}
+  .stream-hero-shade{background:linear-gradient(0deg,#000 0%,rgba(0,0,0,.75) 45%,rgba(0,0,0,.1) 80%)}
+  .stream-hero-content{padding-bottom:40px}
+  .sbtn{min-height:44px;padding:0 20px;font-size:15px}
+  .srow-arrow{display:none}
+  .player .parrow{position:absolute;bottom:12px;width:44px;height:44px}
+  .player-count{padding:24px 0 26px}
+  .player #pPrev{left:16px}.player #pNext{right:16px}
+  .player-stage{padding:0 8px 0}
+  .player video{max-width:100%}
+}
+
+
+/* artist photo + gallery */
+.artist-photo{display:block;padding:0;border:none;cursor:zoom-in;position:relative;width:min(100%,420px);aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#111;border:1px solid var(--line)}
+.artist-photo .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.artist-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.8) 0%,rgba(0,0,0,0) 45%);pointer-events:none}
+.artist-photo .lg{position:absolute;z-index:1;left:22px;bottom:20px;width:46%;filter:drop-shadow(0 6px 18px rgba(0,0,0,.7))}
+.thumbs{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:-10px}
+.thumb{width:64px;aspect-ratio:4/5;padding:0;border:2px solid transparent;border-radius:8px;overflow:hidden;cursor:pointer;background:#111;opacity:.75;transition:opacity .15s ease,border-color .15s ease}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb:hover,.thumb:focus-visible{opacity:1;border-color:var(--gold)}
+.lightbox{position:fixed;inset:0;z-index:110;background:#000;display:flex;flex-direction:column}
+.lightbox[hidden]{display:none}
+.lightbox .lb-stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;gap:14px;padding:0 12px}
+.lightbox img{max-width:min(100%,1100px);max-height:100%;object-fit:contain;border-radius:8px}
+@media (max-width:760px){
+  .lightbox .parrow{position:absolute;bottom:12px;width:44px;height:44px}
+  .lightbox #lbPrev{left:16px}.lightbox #lbNext{right:16px}
+}
+
+
+/* artist "show" pages */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.artists{background:#000;padding:90px 0 20px}
+.casting-head{margin-bottom:40px}
+.casting-head h2{font-size:clamp(44px,7vw,80px);margin:10px 0 14px}
+.casting-head p{color:var(--muted);margin:0;max-width:560px}
+.show{padding-bottom:50px}
+.show + .show{border-top:1px solid #1d1d20;padding-top:10px}
+.show-hero{position:relative;min-height:min(80vh,660px);display:flex;align-items:flex-end;overflow:hidden}
+.show-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.show-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.94) 0%,rgba(0,0,0,.7) 38%,rgba(0,0,0,0) 72%),linear-gradient(0deg,#000 0%,rgba(0,0,0,0) 35%)}
+.show-content{position:relative;width:100%;padding-top:70px;padding-bottom:40px;display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.show-logo{width:min(320px,62%);filter:drop-shadow(0 8px 24px rgba(0,0,0,.7))}
+.show-desc{margin:0;max-width:520px;color:#e6e3dc;font-size:16px}
+.show-btns{display:flex;flex-wrap:wrap;gap:12px}
+.sbtn-gold{background:var(--gold);color:var(--gold-ink)}
+.sbtn-gold:hover{background:var(--gold-2)}
+.show .badge{align-self:flex-start}
+.show .links{justify-content:flex-start}
+.show .srow{margin-top:26px}
+.show .srow h4{font:700 20px Inter,sans-serif;margin:0 0 4px;padding:0 24px;max-width:1180px;margin-left:auto;margin-right:auto}
+.card.photo{cursor:zoom-in}
+.card.soon{cursor:default;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:18px;text-align:center;background:linear-gradient(160deg,#1c1710 0%,#0d0d0f 100%);border:1px dashed rgba(200,149,47,.55)}
+.card.soon::after{display:none}
+.card.soon:hover{transform:none;box-shadow:none}
+.soon-ic svg{width:34px;height:34px;color:var(--gold-2)}
+.soon-t{font:700 14px/1.35 Inter,sans-serif;color:#e6e3dc}
+@media (max-width:760px){
+  .show-hero{min-height:0;padding-top:300px}
+  .show-bg{height:560px;object-position:62% 20%}
+  .show-shade{background:linear-gradient(180deg,rgba(0,0,0,0) 0,rgba(0,0,0,.1) 200px,rgba(0,0,0,.85) 420px,#000 540px)}
+  .show-content{padding-top:0;padding-bottom:20px}
+  .show-logo{width:min(240px,70%)}
+  .show-btns .sbtn{flex:1 1 auto;justify-content:center}
+}
+
+/* contact */
+.contact{padding:100px 0 140px;text-align:center;border-top:1px solid var(--line);position:relative;overflow:hidden}
+.contact::before{content:"";position:absolute;inset:auto -10% -40%;height:90%;background:radial-gradient(ellipse 55% 60% at 50% 70%, rgba(200,149,47,.18), transparent 70%);pointer-events:none}
+.contact .wrap{position:relative;display:flex;flex-direction:column;align-items:center;gap:22px}
+.contact h2{font-size:clamp(44px,8vw,96px);max-width:900px}
+.contact p{color:#d2cfc8;max-width:520px;margin:0;font-size:17px}
+.contact .btn{min-height:58px;padding:0 32px;font-size:17px}
+footer{border-top:1px solid var(--line);padding:28px 0 110px;color:#77746e;font-size:13px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+footer img{height:22px;width:auto;opacity:.8}
+
+/* sticky mobile CTA */
+.sticky-cta{position:fixed;left:12px;right:12px;bottom:12px;z-index:30;display:none}
+.sticky-cta .btn{width:100%;min-height:54px;box-shadow:0 12px 30px rgba(0,0,0,.55)}
+@media (max-width:760px){
+  .artist-head{margin-bottom:20px}
+  .nav nav a:not(.btn){display:none}
+  .nav .btn{display:none}
+  .sticky-cta{display:block}
+  .hero{padding:72px 0 70px}
+  .hero p.lead{font-size:17px}
+  .artist{gap:26px;padding:36px 0}
+  .visual{width:min(100%,360px)}
+}
+@media (min-width:761px){ footer{padding-bottom:28px} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#topo" aria-label="Art Music Entertainment, início"><img src="img/artmusic.png" alt="Art Music Entertainment"></a>
+    <nav aria-label="Principal">
+      <a href="#sobre">Sobre</a>
+      <a href="#artistas">Artistas</a>
+      <a href="#contato">Contato</a>
+      <a class="btn btn-gold js-wa" data-msg="Olá! Vim pelo site da Art Music e quero solicitar um orçamento." href="#contato">Solicite seu orçamento</a>
+    </nav>
+  </div>
+</header>
+
+<main id="topo">
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Agência de artistas</span>
+      <img class="hero-logo" src="img/artmusic.png" alt="Art Music Entertainment">
+      <p class="lead">Do primeiro contato ao fim do show, a gente cuida de tudo.</p>
+      <div class="ctas">
+        <a class="btn btn-gold js-wa" data-msg="Olá! Vim pelo site da Art Music e quero solicitar um orçamento." href="#contato">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg>
+          SOLICITE SEU ORÇAMENTO AGORA
+        </a>
+        <a class="btn btn-line" href="#artistas">Conheça os artistas</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="sobre">
+    <div class="wrap grid">
+      <div>
+        <span class="eyebrow">Sobre</span>
+        <h2>Música, palco e<br>quem faz acontecer.</h2>
+      </div>
+      <div>
+        <p>A Art Music Entertainment cuida da carreira dos seus artistas e também de toda a parte técnica, logística e operacional dos shows. Do planejamento ao palco, o contratante recebe tudo pronto pra uma apresentação sem dor de cabeça.</p>
+        <div class="pillars">
+          <div class="pillar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+            <div><b>Agenciamento artístico</b><span>Direcionamento e planejamento de carreira, posicionamento de cada artista e todo o comercial de shows: negociação, agenda e contratos.</span></div>
+          </div>
+          <div class="pillar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            <div><b>Produção técnica e logística</b><span>Rider técnico, mapa de palco, passagem de som e cronograma do evento, com a equipe acompanhando o artista da chegada ao fim do show.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="player" id="player" role="dialog" aria-modal="true" aria-label="Player de vídeo" hidden>
+    <div class="player-top">
+      <div class="player-title"><b id="pTitle"></b><span id="pSub"></span></div>
+      <button type="button" class="pbtn" id="pClose" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="player-stage">
+      <button type="button" class="pbtn parrow" id="pPrev" aria-label="Vídeo anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+      <video id="pVideo" controls playsinline></video>
+      <button type="button" class="pbtn parrow" id="pNext" aria-label="Próximo vídeo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+    </div>
+    <div class="player-count" id="pCount"></div>
+  </div>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Fotos" hidden>
+    <div class="player-top">
+      <div class="player-title"><b id="lbTitle"></b><span>Fotos</span></div>
+      <button type="button" class="pbtn" id="lbClose" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="lb-stage">
+      <button type="button" class="pbtn parrow" id="lbPrev" aria-label="Foto anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+      <img id="lbImg" alt="">
+      <button type="button" class="pbtn parrow" id="lbNext" aria-label="Próxima foto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+    </div>
+    <div class="player-count" id="lbCount"></div>
+  </div>
+
+  <section class="artists" id="artistas">
+    <div class="wrap casting-head">
+      <span class="eyebrow">Casting</span>
+      <h2>Nossos artistas</h2>
+      <p>Ouça, assista e chame no WhatsApp pra levar qualquer um deles pro seu evento.</p>
+    </div>
+      <article class="show" id="yan-gomes" aria-labelledby="yan-gomes-t">
+        <div class="show-hero">
+          <img class="show-bg" src="video/yan-hero.jpg" alt="">
+          <div class="show-shade"></div>
+          <div class="wrap show-content">
+            <span class="stream-kicker">Trap - Rap</span>
+            <h3 class="sr-only" id="yan-gomes-t">Yan Gomes</h3>
+            <img class="show-logo" src="img/yan.png" alt="Yan Gomes">
+            
+            <p class="show-desc">Cantor de trap e rap, com show ao vivo pensado pra levantar a pista do começo ao fim. No repertório, além das músicas autorais, ele canta os sucessos de Filipe Ret, Poesia Acústica, Delacruz, Matuê, Orochi, entre outros.</p>
+            <div class="show-btns">
+              <button type="button" class="sbtn sbtn-play" data-play="yan"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg>Assistir</button>
+              <a class="sbtn sbtn-gold js-wa" data-msg="Olá! Vim pelo site da Art Music e quero um orçamento para o show do Yan Gomes." href="#contato"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg>Contratar Yan Gomes</a>
+            </div>
+            <div class="links">
+            <a class="btn btn-line" href="https://open.spotify.com/intl-pt/artist/7GMauHSOOjV92arrHvfjA2" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7 9.5c3.5-1 7-.6 10 1M7.5 13c3-.8 6-.4 8.5.9M8 16.3c2.4-.6 4.7-.3 6.7.7"/></svg>
+              Spotify
+            </a>
+            </div>
+          </div>
+        </div>
+        <div class="srow"><h4>Vídeos</h4><div class="srow-viewport" data-videos="yan"></div></div>
+        <div class="srow"><h4>Fotos</h4><div class="srow-viewport" data-photos="yan"></div></div>
+      </article>
+      <article class="show" id="davi-sa" aria-labelledby="davi-sa-t">
+        <div class="show-hero">
+          <img class="show-bg" src="video/davi-hero.jpg" alt="">
+          <div class="show-shade"></div>
+          <div class="wrap show-content">
+            <span class="stream-kicker">Funk</span>
+            <h3 class="sr-only" id="davi-sa-t">DJ Davi Sá</h3>
+            <img class="show-logo" src="img/davi.png" alt="DJ Davi Sá">
+            
+            <p class="show-desc">Sets que conversam com o público, de festas e baladas a confraternizações e formaturas.</p>
+            <div class="show-btns">
+              <button type="button" class="sbtn sbtn-play" data-play="davi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg>Assistir</button>
+              <a class="sbtn sbtn-gold js-wa" data-msg="Olá! Vim pelo site da Art Music e quero um orçamento para o DJ Davi Sá." href="#contato"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg>Contratar DJ Davi Sá</a>
+            </div>
+            <div class="links">
+            <a class="btn btn-line" href="https://open.spotify.com/user/22sv7lkgz2yyers7rduyzjlai" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7 9.5c3.5-1 7-.6 10 1M7.5 13c3-.8 6-.4 8.5.9M8 16.3c2.4-.6 4.7-.3 6.7.7"/></svg>
+              Spotify
+            </a>
+            <a class="btn btn-line" href="https://www.youtube.com/@DjDaviS%C3%A1" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3z"/></svg>
+              YouTube
+            </a>
+            <a class="btn btn-line" href="https://soundcloud.com/djdavisa" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 18a4 4 0 0 0 0-8 6 6 0 0 0-11.3-1.5M3 12v6M6 10v8M9 9v9M12 9v9h6"/></svg>
+              SoundCloud
+            </a>
+            </div>
+          </div>
+        </div>
+        <div class="srow"><h4>Vídeos</h4><div class="srow-viewport" data-videos="davi"></div></div>
+        <div class="srow"><h4>Fotos</h4><div class="srow-viewport" data-photos="davi"></div></div>
+      </article>
+      <article class="show" id="dj-samu" aria-labelledby="dj-samu-t">
+        <div class="show-hero">
+          <img class="show-bg" src="video/samu-hero.jpg" alt="">
+          <div class="show-shade"></div>
+          <div class="wrap show-content">
+            <span class="stream-kicker">Funk</span>
+            <h3 class="sr-only" id="dj-samu-t">DJ Samu</h3>
+            <img class="show-logo" src="img/samu.png" alt="DJ Samu">
+            <span class="badge">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5"/></svg>
+            +13 milhões de plays nas plataformas digitais
+          </span>
+            <p class="show-desc">DJ e produtor com mais de 13 milhões de plays nas plataformas digitais, energia de pista do início ao fim.</p>
+            <div class="show-btns">
+              <button type="button" class="sbtn sbtn-play" data-play="samu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg>Assistir</button>
+              <a class="sbtn sbtn-gold js-wa" data-msg="Olá! Vim pelo site da Art Music e quero um orçamento para o DJ Samu." href="#contato"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg>Contratar DJ Samu</a>
+            </div>
+            <div class="links">
+            <a class="btn btn-line" href="https://open.spotify.com/intl-pt/artist/6mX55tthR6WvOwacW3OrXZ" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7 9.5c3.5-1 7-.6 10 1M7.5 13c3-.8 6-.4 8.5.9M8 16.3c2.4-.6 4.7-.3 6.7.7"/></svg>
+              Spotify
+            </a>
+            <a class="btn btn-line" href="https://www.youtube.com/@djsamuaragao" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3z"/></svg>
+              YouTube
+            </a>
+            <a class="btn btn-line" href="https://soundcloud.com/djsamuaragao" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 18a4 4 0 0 0 0-8 6 6 0 0 0-11.3-1.5M3 12v6M6 10v8M9 9v9M12 9v9h6"/></svg>
+              SoundCloud
+            </a>
+            </div>
+          </div>
+        </div>
+        <div class="srow"><h4>Vídeos</h4><div class="srow-viewport" data-videos="samu"></div></div>
+        <div class="srow"><h4>Fotos</h4><div class="srow-viewport" data-photos="samu"></div></div>
+      </article>
+  </section>
+
+  <section class="contact" id="contato">
+    <div class="wrap">
+      <span class="eyebrow">Contratação</span>
+      <h2>Leve nossos artistas pro seu evento</h2>
+      <p>Fale direto com a Art Music no WhatsApp. Informe data, cidade, tipo de evento e outras informações. Dessa forma, podemos te enviar a melhor proposta possível.</p>
+      <a class="btn btn-gold js-wa" data-msg="Olá! Vim pelo site da Art Music e quero solicitar um orçamento." href="#contato">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg>
+        SOLICITE SEU ORÇAMENTO AGORA
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="img/artmusic.png" alt="Art Music Entertainment">
+    <span>© 2026 Art Music Entertainment · WhatsApp (32) 99136-0477</span>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <a class="btn btn-gold js-wa" data-msg="Olá! Vim pelo site da Art Music e quero solicitar um orçamento." href="#contato">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg>
+    SOLICITE SEU ORÇAMENTO AGORA
+  </a>
+</div>
+
+<script>
+var VIDEOS = [
+  {id:"yan",  artist:"Yan Gomes",   genre:"Trap - Rap", title:"Ao vivo",                        src:"video/yan.mp4",  poster:"video/yan-poster.jpg", card:"video/yan-card.jpg", hero:"video/yan-hero.jpg",  logo:"img/yan.png",  anchor:"#yan-gomes"},
+  {id:"yan-aftermovie", artist:"Yan Gomes", genre:"Trap - Rap", title:"Aftermovie", src:"video/yan-aftermovie.mp4", poster:"video/yan-aftermovie-poster.jpg", card:"video/yan-aftermovie-card.jpg", logo:"img/yan.png", anchor:"#yan-gomes"},
+  {id:"yan-palco", artist:"Yan Gomes", genre:"Trap - Rap", title:"No palco", src:"video/yan-palco.mp4", poster:"video/yan-palco-poster.jpg", card:"video/yan-palco-card.jpg", logo:"img/yan.png", anchor:"#yan-gomes"},
+  {id:"yan-banda", artist:"Yan Gomes", genre:"Trap - Rap", title:"Show com banda", src:"video/yan-banda.mp4", poster:"video/yan-banda-poster.jpg", card:"video/yan-banda-card.jpg", logo:"img/yan.png", anchor:"#yan-gomes"},
+  {id:"davi", artist:"DJ Davi Sá",  genre:"Funk",       title:"Aftermovie 06",                     src:"video/davi.mp4", poster:"video/davi-poster.jpg", card:"video/davi-card.jpg", hero:"video/davi-hero.jpg", logo:"img/davi.png", anchor:"#davi-sa"},
+  {id:"davi-01", artist:"DJ Davi Sá", genre:"Funk", title:"Aftermovie 01", src:"video/davi-01.mp4", poster:"video/davi-01-poster.jpg", card:"video/davi-01-card.jpg", logo:"img/davi.png", anchor:"#davi-sa"},
+  {id:"davi-05", artist:"DJ Davi Sá", genre:"Funk", title:"Aftermovie 05", src:"video/davi-05.mp4", poster:"video/davi-05-poster.jpg", card:"video/davi-05-card.jpg", logo:"img/davi.png", anchor:"#davi-sa"},
+  {id:"davi-02", artist:"DJ Davi Sá", genre:"Funk", title:"Aftermovie 02", src:"video/davi-02.mp4", poster:"video/davi-02-poster.jpg", card:"video/davi-02-card.jpg", logo:"img/davi.png", anchor:"#davi-sa"},
+  {id:"davi-04", artist:"DJ Davi Sá", genre:"Funk", title:"Aftermovie 04", src:"video/davi-04.mp4", poster:"video/davi-04-poster.jpg", card:"video/davi-04-card.jpg", logo:"img/davi.png", anchor:"#davi-sa"},
+  {id:"samu", artist:"DJ Samu",     genre:"Funk",       title:"Estação São Pedro x Cultural Bar", src:"video/samu.mp4", poster:"video/samu-poster.jpg", card:"video/samu-card.jpg", hero:"video/samu-hero.jpg", logo:"img/samu.png", anchor:"#dj-samu"},
+  {id:"samu-terrazzo", artist:"DJ Samu", genre:"Funk", title:"Terrazzo", src:"video/samu-terrazzo.mp4", poster:"video/samu-terrazzo-poster.jpg", card:"video/samu-terrazzo-card.jpg", logo:"img/samu.png", anchor:"#dj-samu"},
+  {id:"samu-fishbone", artist:"DJ Samu", genre:"Funk", title:"Fishbone Búzios", src:"video/samu-fishbone.mp4", poster:"video/samu-fishbone-poster.jpg", card:"video/samu-fishbone-card.jpg", logo:"img/samu.png", anchor:"#dj-samu"},
+  {id:"samu-privi", artist:"DJ Samu", genre:"Funk", title:"Privi Juiz de Fora", src:"video/samu-privi.mp4", poster:"video/samu-privi-poster.jpg", card:"video/samu-privi-card.jpg", logo:"img/samu.png", anchor:"#dj-samu"},
+  {id:"samu-bosque", artist:"DJ Samu", genre:"Funk", title:"Bosque Bar", src:"video/samu-bosque.mp4", poster:"video/samu-bosque-poster.jpg", card:"video/samu-bosque-card.jpg", logo:"img/samu.png", anchor:"#dj-samu"}
+];
+
+function byId(id){ for (var i=0;i<VIDEOS.length;i++) if (VIDEOS[i].id===id) return VIDEOS[i]; }
+var KEY_ARTIST = {yan:"Yan Gomes", davi:"DJ Davi Sá", samu:"DJ Samu"};
+function artistList(k){ return VIDEOS.filter(function(v){return v.artist===KEY_ARTIST[k];}).map(function(v){return v.id;}); }
+var PLAY_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg>';
+function buildRow(vp, items) {
+  var tr = document.createElement("div"); tr.className = "srow-track";
+  items.forEach(function (it) {
+    if (it.soon) {
+      var d = document.createElement("div"); d.className = "card soon";
+      d.innerHTML = '<span class="soon-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><span class="soon-t"></span>';
+      d.querySelector(".soon-t").textContent = it.soon;
+      tr.appendChild(d); return;
+    }
+    var c = document.createElement("button"); c.type = "button"; c.className = "card" + (it.photo ? " photo" : "");
+    c.setAttribute("aria-label", it.label);
+    c.innerHTML = '<img class="poster" alt="" loading="lazy" src="' + it.img + '">' +
+      (it.logo ? '<img class="clogo" alt="" src="' + it.logo + '">' : '') +
+      (it.photo ? '' : '<span class="cplay">' + PLAY_SVG + '</span>') +
+      (it.title ? '<span class="ctitle"></span>' : '');
+    if (it.title) c.querySelector(".ctitle").textContent = it.title;
+    c.addEventListener("click", it.onClick);
+    tr.appendChild(c);
+  });
+  vp.appendChild(tr);
+  ["l","r"].forEach(function (side) {
+    var b = document.createElement("button"); b.type = "button"; b.className = "srow-arrow " + side;
+    b.setAttribute("aria-label", side === "l" ? "Voltar" : "Avançar");
+    b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + (side === "l" ? 'm15 18-6-6 6-6' : 'm9 18 6-6-6-6') + '"/></svg>';
+    b.addEventListener("click", function () { tr.scrollBy({left: (side === "l" ? -1 : 1) * tr.clientWidth * 0.8, behavior: "smooth"}); });
+    vp.appendChild(b);
+  });
+  function arrows() {
+    vp.querySelector(".l").hidden = tr.scrollLeft < 8;
+    vp.querySelector(".r").hidden = tr.scrollLeft + tr.clientWidth >= tr.scrollWidth - 8;
+  }
+  tr.addEventListener("scroll", arrows); window.addEventListener("resize", arrows); setTimeout(arrows, 0);
+}
+
+var player = document.getElementById("player"), pv = document.getElementById("pVideo");
+var pList = [], pIdx = 0, lastFocus = null;
+function loadCurrent() {
+  var v = byId(pList[pIdx]);
+  pv.src = v.src; pv.poster = v.poster;
+  document.getElementById("pTitle").textContent = v.artist;
+  document.getElementById("pSub").textContent = v.genre + " · " + v.title;
+  document.getElementById("pCount").textContent = pList.length > 1 ? (pIdx + 1) + " de " + pList.length : "";
+  document.getElementById("pPrev").disabled = pIdx === 0;
+  document.getElementById("pNext").disabled = pIdx === pList.length - 1;
+  var p = pv.play(); if (p && p.catch) p.catch(function(){});
+}
+function openPlayer(list, id) {
+  lastFocus = document.activeElement;
+  pList = list; pIdx = Math.max(0, list.indexOf(id));
+  player.hidden = false; document.body.style.overflow = "hidden";
+  loadCurrent();
+  document.getElementById("pClose").focus();
+}
+function closePlayer() {
+  pv.pause(); pv.removeAttribute("src"); pv.load();
+  player.hidden = true; document.body.style.overflow = "";
+  if (lastFocus) lastFocus.focus();
+}
+document.getElementById("pClose").addEventListener("click", closePlayer);
+document.getElementById("pPrev").addEventListener("click", function () { if (pIdx > 0) { pIdx--; loadCurrent(); } });
+document.getElementById("pNext").addEventListener("click", function () { if (pIdx < pList.length - 1) { pIdx++; loadCurrent(); } });
+pv.addEventListener("ended", function () { if (pIdx < pList.length - 1) { pIdx++; loadCurrent(); } });
+player.addEventListener("click", function (e) { if (e.target === player || e.target.classList.contains("player-stage")) closePlayer(); });
+player.addEventListener("keydown", function (e) {
+  if (e.key === "Escape") closePlayer();
+  if (e.key === "ArrowRight" && e.target.tagName !== "VIDEO") document.getElementById("pNext").click();
+  if (e.key === "ArrowLeft" && e.target.tagName !== "VIDEO") document.getElementById("pPrev").click();
+});
+var GAL = {yan:{name:"Yan Gomes",n:6}, davi:{name:"DJ Davi Sá",n:3}, samu:{name:"DJ Samu",n:5}};
+var lb = document.getElementById("lightbox"), lbImg = document.getElementById("lbImg"), lbKey = null, lbI = 0, lbFocus = null;
+function lbShow() {
+  var g = GAL[lbKey];
+  lbImg.src = "foto/" + lbKey + "-" + (lbI + 1) + ".jpg"; lbImg.alt = g.name + ", foto " + (lbI + 1);
+  document.getElementById("lbTitle").textContent = g.name;
+  document.getElementById("lbCount").textContent = (lbI + 1) + " de " + g.n;
+  document.getElementById("lbPrev").disabled = lbI === 0;
+  document.getElementById("lbNext").disabled = lbI === g.n - 1;
+}
+function lbOpen(k, i) { lbFocus = document.activeElement; lbKey = k; lbI = i; lb.hidden = false; document.body.style.overflow = "hidden"; lbShow(); document.getElementById("lbClose").focus(); }
+function lbClose() { lb.hidden = true; document.body.style.overflow = ""; if (lbFocus) lbFocus.focus(); }
+document.getElementById("lbClose").addEventListener("click", lbClose);
+document.getElementById("lbPrev").addEventListener("click", function () { if (lbI > 0) { lbI--; lbShow(); } });
+document.getElementById("lbNext").addEventListener("click", function () { if (lbI < GAL[lbKey].n - 1) { lbI++; lbShow(); } });
+lb.addEventListener("click", function (e) { if (e.target === lb || e.target.classList.contains("lb-stage")) lbClose(); });
+lb.addEventListener("keydown", function (e) {
+  if (e.key === "Escape") lbClose();
+  if (e.key === "ArrowRight") document.getElementById("lbNext").click();
+  if (e.key === "ArrowLeft") document.getElementById("lbPrev").click();
+});
+
+document.querySelectorAll("[data-videos]").forEach(function (vp) {
+  var k = vp.getAttribute("data-videos"), list = artistList(k);
+  var items = list.map(function (id) {
+    var v = byId(id);
+    return {img: v.card, title: v.title, label: "Assistir " + v.artist + ": " + v.title, onClick: function () { openPlayer(list, id); }};
+  });
+  if (k === "yan") items.push({soon: "Em breve novos episódios da nossa história pelos palcos"});
+  buildRow(vp, items);
+});
+document.querySelectorAll("[data-photos]").forEach(function (vp) {
+  var k = vp.getAttribute("data-photos"), g = GAL[k], items = [];
+  for (var i = 0; i < g.n; i++) (function (i) {
+    items.push({img: "foto/" + k + "-" + (i + 1) + "-p.jpg", photo: true, label: "Ver foto " + (i + 1) + " de " + g.name, onClick: function () { lbOpen(k, i); }});
+  })(i);
+  buildRow(vp, items);
+});
+document.querySelectorAll("[data-play]").forEach(function (b) {
+  b.addEventListener("click", function () { var k = b.getAttribute("data-play"); var l = artistList(k); openPlayer(l, l[0]); });
+});
+// Número do WhatsApp da Art Music: só dígitos, com 55 + DDD (ex.: 5532999999999).
+var WHATSAPP = "5532991360477";
+document.querySelectorAll(".js-wa").forEach(function (a) {
+  var msg = encodeURIComponent(a.getAttribute("data-msg") || "");
+  a.href = WHATSAPP ? "https://wa.me/" + WHATSAPP + "?text=" + msg
+                    : "https://api.whatsapp.com/send?text=" + msg;
+  a.target = "_blank";
+  a.rel = "noopener";
+});
+</script>
+</body>
+</html>
